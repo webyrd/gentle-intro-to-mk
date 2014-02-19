@@ -1,6 +1,6 @@
-;;; newer version: 19 March 2013
+(define sort list-sort)
 
-(define empty-c '(() () () () ())) ;; moved 
+(define empty-c '(() () () () ()))
 
 (define-syntax test-check
   (syntax-rules ()
@@ -22,7 +22,7 @@
   (syntax-rules ()
     ((_ () e) (lambda () e))))
 
-(define-syntax lambdag@ ;; moved
+(define-syntax lambdag@
   (syntax-rules (:)
     ((_ (c) e) (lambda (c) e))
     ((_ (c : S D Y N T) e)
@@ -137,7 +137,7 @@
          (let ((x (var 'x)) ...)
            (bind* (g0 c) g ...)))))))
 
-(define lambdao ;; moved
+(define lambdao
   (syntax-rules ()
     ((_ args b0 b ...)
      (lambda args
@@ -206,7 +206,7 @@
       ((c) (choice c f))
       ((c f^) (choice c (lambdaf@ () (mplus (f) f^)))))))
 
-(define c->S (lambda (c) (car c))) ;; moved
+(define c->S (lambda (c) (car c)))
 (define c->D (lambda (c) (cadr c)))
 (define c->Y (lambda (c) (caddr c)))
 (define c->N (lambda (c) (cadddr c)))
@@ -333,8 +333,6 @@
       ((pair? v)
        (or (member* u (car v)) (member* u (cdr v))))
       (else #f))))
-
-;;;
 
 (define drop-N-b/c-const
   (lambdag@ (c : S D Y N T)
@@ -571,7 +569,7 @@
               (loop c^^ (cdr fns^) (length (LOF))))
              (else (loop c^ (cdr fns^) (sub1 n))))))))))
 
-(define absento ;; changed
+(define absento
   (lambda (u v)
     (lambdag@ (c : S D Y N T)
       (cond
@@ -603,7 +601,7 @@
         (cond
           ((var? u) #f)
           (else (not (pred u))))))))
-;; moved 
+
 (define ground-non-symbol?
   (ground-non-<type>? symbol?))
 
@@ -625,9 +623,8 @@
         [(ground-non-number? u S) (mzero)]
         [(mem-check u Y S) (mzero)]
         [else (unit `(,S ,D ,Y (,u . ,N) ,T))]))))
-;; end moved
 
-(define =/= ;; moved
+(define =/=
   (lambda (u v)
     (lambdag@ (c : S D Y N T)
       (cond
